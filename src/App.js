@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import React, { createContext } from 'react'
+import UserProfile from './components/UserProfile'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const UserContext = createContext()
+
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: 'Jim Smith',
+      email: 'email@example.com',
+      department: 'IT',
+      location: 'USA',
+    }
+  }
+
+  render() {
+    const { name, email, department, location } = this.state
+    return (
+      <div>
+        <UserContext.Provider value={{ name, email, department, location }}>
+          <UserProfile />
+        </UserContext.Provider>
+      </div>
+    )
+  }
 }
-
-export default App;
+export default App
